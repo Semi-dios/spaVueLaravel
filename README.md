@@ -6,7 +6,7 @@ Requrimientos
 
 Composer
 Node js
-Laragon , Wamp, Xampp
+Laragon , Wamp, Xampp ,Mamp
 Laravel 7^*
 Php 7.14^*
 Mysql
@@ -24,7 +24,7 @@ Al digitar php artisan route:list podra visulizar las rutas actuales en este cas
 Inicie servicios digitando php artisan serve -- En una terminal diferente digite npm run watch para que se inicie la compilacion del webpack (css,js,bootstrap,componentes y admin-lte)
 
 Acceda a la url http://127.0.0.1:3000/
-Credenciales  de login :
+Credenciales  de login :   
  
             'name'=>'User1',
             'email'=>'user1@gmail.com',
