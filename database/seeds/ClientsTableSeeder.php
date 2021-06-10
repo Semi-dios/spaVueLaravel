@@ -14,12 +14,14 @@ class ClientsTableSeeder extends Seeder
     {
        Client::create([
             'name'=>'Primax',
-            'id_City'=>'1'
+            'id_City'=>'1',
+            'url'=>'1922486463.png'
 
         ]);
        Client::create([
             'name'=>'Deone',
-            'id_City'=>'2'
+            'id_City'=>'2',
+            'url'=>'1922486463.png'
 
         ]);
 

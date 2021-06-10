@@ -52,6 +52,12 @@ const router = new VueRouter({
         component: require('./views/Clients.vue').default,
         meta: { requiresAuth: true },
     },
+    {
+        path: '/dashboard/clients/addClient',
+        name: 'clients.create',
+        component: require('./views/client/RegisterClient.vue').default,
+        meta: { requiresAuth: true },
+    },
 
     {
         path: '/dashboard/clients/:id/show',

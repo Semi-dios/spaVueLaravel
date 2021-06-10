@@ -33,7 +33,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -44,9 +44,30 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $client= Client::create($request->all());
-        //return response()->json($client, 201);
-        return response()->json(['client'=>$client,'message' => 'Client created successfully !!'],201);
+        $validator =  Validator::make( $request->all(),[
+            'name'=> 'required|min:4|max:20',
+            'id_City'=> 'required',
+            'url' => 'required|image|max:2048',
+
+        ]);
+        if($validator->fails()){
+            return response()->json(['error'=>$validator->errors(),'message' => 'error register !!'],401);
+        }
+            $image = $request->file('url');
+            
+            $new_name = rand().'.'.$image->getClientOriginalExtension(); 
+            $image->move(public_path('/images'), $new_name);
+          
+
+          Client::create([
+            'name' => $request->name,
+            'id_City' => $request->id_City,
+            'url' => $new_name
+        ]);
+      
+      
+     
+        return response()->json(['message' => 'Client created successfully !!',$image . '"'],201);
     }
 
     /**

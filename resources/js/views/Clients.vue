@@ -5,6 +5,12 @@
         <h3 class="card-title">Table Clients</h3>
 
         <div class="card-tools">
+          <a
+            class="btn btn-app float-left mr-3 bg-success btn-sm"
+            :href="'/#/dashboard/clients/addClient'"
+          >
+            <i class="fas fa-eye"></i>Create
+          </a>
           <ul class="pagination pagination-sm float-right">
             <li class="page-item"><a class="page-link" href="#">«</a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -22,6 +28,7 @@
               <th style="width: 10px">Id</th>
               <th>Name</th>
               <th>City</th>
+              <th>Image</th>
 
               <th style="width: 400px" class="text-right">Options</th>
             </tr>
@@ -31,6 +38,9 @@
               <td>{{ index + 1 }}</td>
               <td>{{ client.name }}</td>
               <td>{{ client.id_city }}</td>
+              <td>
+                <img :src="/images/ + client.url" width="100" height="100" />
+              </td>
 
               <td>
                 <a
@@ -72,6 +82,8 @@ export default {
     return {
       clients: [],
       error: "",
+      imagePreview: null,
+      showPreview: false,
     };
   },
   methods: {
@@ -79,18 +91,25 @@ export default {
       $("#modal-delete-client").modal("show");
       eventBus.$emit("deleteModalWindow", { item: id });
     },
+    onFileChange(event) {
+      this.imagePreview = this.clients.url;
+      if (this.clients.url) {
+        this.showPreview = true;
+      }
+    },
   },
   mounted() {
-    this.axios
-      .get("/api/clients")
-      .then((response) => {
-        this.clients = response.data.data;
-        console.log(response.data.data);
-      })
-      .catch((error) => {
-        this.error = error.response.data.message || error.message;
-        console.log(this.error);
-      });
+    this.onFileChange(),
+      this.axios
+        .get("/api/clients")
+        .then((response) => {
+          this.clients = response.data.data;
+          console.log(response.data.data);
+        })
+        .catch((error) => {
+          this.error = error.response.data.message || error.message;
+          console.log(this.error);
+        });
   },
 };
 </script>
